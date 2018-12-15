@@ -2,17 +2,7 @@ extends layout
 
 block content
 	div(class='container')
-		div(class='card')
-			h1 Hwo evil are you?
-			img(src='logo.png' width='50px')
-		div(class='card') Hi
-		div(class='card') Bye
-		div(class='card') Hello
-		div(class='card') Hi
-		div(class='card') Bye
-		div(class='card') Hello
-		div(class='card') Hi
-		div(class='card') Bye
-		div(class='card') Hello
-		div(class='card') Hi
-		div(class='card') Bye
+		each val in cards
+			div(class='card')
+				h1 #{val}
+				img(src='logo.png' width='50px')

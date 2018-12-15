@@ -11,9 +11,21 @@ li {
 	margin-top:0.8em;
 }
 
+li:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 ul {
 	box-shadow: 0px 0px 10px #000000;
 	padding:0.5em;
+	margin:-5em 0;
+	position: fixed;
+	color:white;
+	background: rgba(0,0,0,0.2);
+	width:100%;
+	
+
 }
 
 img {
@@ -46,7 +58,7 @@ img {
 
 .container {
 	width:86em;
-	margin:0 auto;
+	margin:5em auto;
 }
 
 .card {
@@ -61,4 +73,8 @@ img {
 
 h1 {
 	margin:0;
+}
+
+a {
+	color:white;
 }
