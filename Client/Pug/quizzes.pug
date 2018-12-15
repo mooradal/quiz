@@ -3,6 +3,7 @@ extends layout
 block content
 	div(class='container')
 		each val in cards
-			div(class='card')
-				h1 #{val}
+			div(class='card' data-quizid=val[0] onclick='runQuiz(this)')
+				h1 #{val[1]}
 				img(src='logo.png' width='50px')
+	script(src='main.js')
