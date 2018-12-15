@@ -1,39 +1,47 @@
 body, html {
 	margin: 0;
-	font-family: sans-serif;
+	font-family: 'Hind Guntur';
+	overflow: auto;
 }
 
 li {
 	display: inline-block;
-	margin-right:2em;
-	float:right;
+	float: right;
 	font-size:1.1em;
-	margin-top:0.8em;
+	margin:0 0.4em;
+	padding:0.4em 1em;
+	transition: 0.5s;
 }
 
 li:hover {
 	text-decoration: underline;
 	cursor: pointer;
+	background: black;
+}
+
+a li:hover {
+	text-decoration: underline;
+	cursor: pointer;
+	color:white;
 }
 
 ul {
-	box-shadow: 0px 0px 10px #0000004b;
 	padding:0.5em;
-	margin:-5em 0;
+	margin:0;
 	position: fixed;
-	background: #ffffff;
 	width:100%;
-	
-
+	background:white;
+	box-shadow:0px 0px 20px #0000007a;
 }
 
-img {
+.nav-img {
 	margin:5px;
+	margin-left:7em;
+	transition: 0.5s;
 }
 
 .landing {
 	z-index:-1;
-	position: absolute;
 	height: 100%;
 	width: 100%;
 	background: url('bg.jpg');
@@ -62,57 +70,73 @@ img {
 
 .card {
 	width:24em;
-	background:#098dfa;
+	background:linear-gradient(45deg,rgb(255, 0, 128),#ff7b00)	;
 	display: inline-block;
 	margin:1em;
 	padding:1em;
 	color:white;
-	border-radius:5px;
+	transition:0.1s ease-in-out;
+	vertical-align: top;
+	outline-color: rgb(39, 2, 25);
+	outline-style: solid;
+	outline-width:0px;
 }
+
+.card:hover {
+	cursor: pointer;
+	outline-width:5px;
+}
+
 
 h1 {
 	margin:0;
 }
 
 a {
-	color:rgb(104, 104, 104);
+	color:rgb(0, 0, 0);
 }
 
 .grid-container {
 	display: grid;
-	grid-column-gap: 50px;
-	grid-template-columns: auto auto auto;
+	grid-gap: 1em;
+	grid-template-columns: auto auto;
 	padding:1em;
 }
 
 .grid-element {
-	background:rgb(255, 0, 170);
-	padding:1em;
+	background:linear-gradient(45deg,rgb(255, 0, 128),#ff7b00);
+	padding:5em;
 	height:20vh;
-	margin:1em 0;
 	border-radius: .2em;
 	display: table;
+	color:white;
+
 }
 
 .grid-element * {
 	display:table-cell;
 	vertical-align: middle;
-	text-align: center;;
+	text-align: center;
+	font-size:2em;
+	margin:0;
 }
 
 .question-container {
 	position: absolute;
-	width:80vw;
-	height:80vh;
+	width:70vw;
+	height:70vh;
 	top:0;
 	bottom:0;
 	right:0;
 	left:0;
 	margin:auto;
-	box-shadow: 0px 0px 30px#0000004b;
 }
 
 .question {
 	text-align: center;
 	padding-top:1.5em;
+}
+
+.card-img {
+	margin-right:0.4em;
 }

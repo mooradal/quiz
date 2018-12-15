@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const pug = require('pug');
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
 var app = express();
 const databaseURI = 'mongodb://MooradAltamimi:XDYBqfJ7kcEkTk5@ds055945.mlab.com:55945/quiz';
 const client = new MongoClient(databaseURI);
@@ -41,11 +42,26 @@ app.get('/home', (req, res) => {
 });
 
 app.get('/quiz', (req,res)  => {
+	var id = req.query.id;
+	console.log(req.query.id)
 	var data  = [];
-	collection.find({"title": "The Ultimate Quiz"}).toArray((err, docs) => {
+	collection.find({_id: ObjectId(id)}).toArray((err, docs) => {
+		if (err) {console.log(err)}
 		data.push(docs);
-		console.log(data[0][0].questions);
-		res.render('quiz', data[0][0].questions);
+		console.log(docs);
+		res.render('quiz', data[0][0]);
+	});
+});
+
+app.get('/answers', (req,res) => {
+	var id = req.query.id;
+	console.log(req.query.id)
+	var data  = [];
+	collection.find({_id: ObjectId(id)}).toArray((err, docs) => {
+		if (err) {console.log(err)}
+		data.push(docs[0].questions.q1.a4);
+		data.push(docs[0].questions.q2.a4);
+		data.push(docs[0].questions.q1.a3);
 	});
 });
 
@@ -53,6 +69,7 @@ fileSend('style.css');
 fileSend('bg.jpg');
 fileSend('logo.png');
 fileSend('main.js');
+fileSend('quiz.js');
 
 function fileSend(filename) {
 	app.get(`/${filename}`, (req, res) => {

@@ -1,9 +1,14 @@
-link(rel="stylesheet", href="style.css")
-
-ul
-	img(src="logo.png", width='40px')
-	a(href='/')
-		li Quizzes
-	a(href='/home')
-		li Home
-block content
+html
+	head
+		link(rel="stylesheet", href="style.css")
+		link(href="https://fonts.googleapis.com/css?family=Hind+Guntur:700" rel="stylesheet")
+	body
+		ul
+			img(src="logo.png", width='40px' class='nav-img')
+			a
+				li Create Your Own
+			a(href='/')
+				li Quizzes
+			a(href='/home')
+				li Home
+		block content

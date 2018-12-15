@@ -1,9 +1,15 @@
-extends layout
+extends layout.pug
 
 block content
 	div(class='container')
 		each val in cards
 			div(class='card' data-quizid=val[0] onclick='runQuiz(this)')
-				h1 #{val[1]}
-				img(src='logo.png' width='50px')
+				div(style="float: left;")
+					img(src="http://placekitten.com/g/200/200" height="200px" class='card-img' width="200px" border="1px")
+				p #{val[1]}
+		each val in cards
+			div(class='card' data-quizid=val[0] onclick='runQuiz(this)')
+				div(style="float: left;")
+					img(src="http://placekitten.com/g/200/200" height="200px" width="200px" class='card-img' border="1px")
+				p #{val[1]}
 	script(src='main.js')
