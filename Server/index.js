@@ -22,6 +22,7 @@ app.listen(4000, () => {
 	console.log('Server is working : 4000');
 });
 
+app.use(cors());
 app.set('views', path.join(__dirname, '../Client/Pug'));
 app.set('view engine', 'pug');
 
@@ -29,7 +30,7 @@ app.get('/', (req, res) => {
 	var data = [];
 	collection.find({}).toArray((err, docs) => {
 		for (var i of docs) {
-			data.push([i._id,i.title]);
+			data.push([i._id,i.title,i.thumbnail]);
 		}
 		res.render('quizzes', {
 			cards: data
@@ -43,7 +44,7 @@ app.get('/home', (req, res) => {
 
 app.get('/quiz', (req,res)  => {
 	var id = req.query.id;
-	console.log(req.query.id)
+	console.log(req.query.id);
 	var data  = [];
 	collection.find({_id: ObjectId(id)}).toArray((err, docs) => {
 		if (err) {console.log(err)}
@@ -59,9 +60,7 @@ app.get('/answers', (req,res) => {
 	var data  = [];
 	collection.find({_id: ObjectId(id)}).toArray((err, docs) => {
 		if (err) {console.log(err)}
-		data.push(docs[0].questions.q1.a4);
-		data.push(docs[0].questions.q2.a4);
-		data.push(docs[0].questions.q1.a3);
+		res.json(docs[0].correct);
 	});
 });
 
@@ -70,6 +69,7 @@ fileSend('bg.jpg');
 fileSend('logo.png');
 fileSend('main.js');
 fileSend('quiz.js');
+fileSend('favicon.ico');
 
 function fileSend(filename) {
 	app.get(`/${filename}`, (req, res) => {

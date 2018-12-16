@@ -1,58 +1,25 @@
 extends layout.pug
 
 block content
-	if imagesonly
-		div(class='question-container')
-			h1(class='question') #{questions.q1.q}
-			div(class='grid-container') 
-				div(class='grid-element' style='background:url('+questions.q1.a1[0]+');') 
-				div(class='grid-element' style='background:url('+questions.q1.a2[0]+');') 
-				div(class='grid-element' style='background:url('+questions.q1.a3[0]+');') 
-				div(class='grid-element' style='background:url('+questions.q1.a4[0]+');') 
-			h1(class='question') #{questions.q2.q}
-			div(class='grid-container') 
-				div(class='grid-element' style='background:url('+questions.q2.a1[0]+');') 
-				div(class='grid-element' style='background:url('+questions.q2.a2[0]+');') 
-				div(class='grid-element' style='background:url('+questions.q2.a3[0]+');') 
-				div(class='grid-element' style='background:url('+questions.q2.a3[0]+');') 
-			h1(class='question') #{questions.q3.q}
-			div(class='grid-container') 
-				div(class='grid-element' style='background:url('+questions.q3.a1[0]+');') 
-				div(class='grid-element' style='background:url('+questions.q3.a2[0]+');') 
-				div(class='grid-element' style='background:url('+questions.q3.a3[0]+');') 
-				div(class='grid-element' style='background:url('+questions.q3.a4[0]+');') 
-	else
-		div(class='question-container')
-			h1(class='question') #{questions.q1.q}
-			div(class='grid-container') 
-				div(class='grid-element') 
-					div #{questions.q1.a1[0]}
-				div(class='grid-element') 
-					div #{questions.q1.a2[0]}
-				div(class='grid-element') 
-					div #{questions.q1.a3[0]}
-				div(class='grid-element') 
-					div #{questions.q1.a4[0]}
-			h1(class='question') #{questions.q2.q}
-			div(class='grid-container') 
-				div(class='grid-element') 
-					div #{questions.q2.a1[0]}
-				div(class='grid-element') 
-					div #{questions.q2.a2[0]}
-				div(class='grid-element') 
-					div #{questions.q2.a3[0]}
-				div(class='grid-element') 
-					div #{questions.q2.a4[0]}
-			h1(class='question') #{questions.q3.q}
-			div(class='grid-container') 
-				div(class='grid-element') 
-					div #{questions.q3.a1[0]}
-				div(class='grid-element') 
-					div #{questions.q3.a2[0]}
-				div(class='grid-element') 
-					div #{questions.q3.a3[0]}
-				div(class='grid-element') 
-					div #{questions.q3.a4[0]}
-	div(class='grid-container') 
-		button Share
-	script(src='quiz.js')
+	div(class='question-container')
+		h1(class='title') #{title} 
+		each val,index in questions.q
+			if imagesonly[1]
+				h1(class='question' style='background-image:url('+images[index]+');') #{val}
+			else
+				h1(class='question') #{val}
+			if imagesonly[0]
+					div(class='grid-container' data-questionindex=index) 
+						each val, aindex in questions.a[index]
+							div(class='grid-element' style="background-image:url(\""+val+"\");" data-answerindex=aindex onclick='check(this)') 
+			else
+				div(class='grid-container' data-questionindex=index) 
+					for i in questions.a[index]
+						div(class='grid-element' onclick='check(this)') #{i} 
+		
+		div(class='share')
+			p Share
+			a(id='twitter')
+				button Twitter
+		script(src='quiz.js')
+	
