@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');
+var cors = require('cors');
 const path = require('path');
 const pug = require('pug');
 const MongoClient = require('mongodb').MongoClient;
@@ -22,7 +22,6 @@ app.listen(process.env.PORT || 4000, () => {
 	console.log('Server is ON');
 });
 
-app.use(cors());
 
 app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*');
@@ -31,6 +30,8 @@ app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
 	next();
 });
+
+app.use(cors());
 
 app.set('views', path.join(__dirname, 'Client/Pug'));
 app.set('view engine', 'pug');
