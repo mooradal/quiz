@@ -19,17 +19,17 @@ client.connect((err) => {
 });
 
 app.listen(process.env.PORT || 4000, () => {
-	console.log('Server is working : 4000');
+	console.log('Server is ON');
 });
 
 app.use(cors());
 
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-    next();
+app.use(function (req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Credentials', true);
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+	res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+	next();
 });
 
 app.set('views', path.join(__dirname, 'Client/Pug'));
@@ -39,7 +39,7 @@ app.get('/quizzes', (req, res) => {
 	var data = [];
 	collection.find({}).toArray((err, docs) => {
 		for (var i of docs) {
-			data.push([i._id,i.title,i.thumbnail]);
+			data.push([i._id, i.title, i.thumbnail]);
 		}
 		res.render('quizzes', {
 			cards: data
@@ -51,24 +51,31 @@ app.get('/', (req, res) => {
 	res.render('index');
 });
 
-app.get('/quiz', (req,res)  => {
+app.get('/quiz', (req, res) => {
 	var id = req.query.id;
 	console.log(req.query.id);
-	var data  = [];
-	collection.find({_id: ObjectId(id)}).toArray((err, docs) => {
-		if (err) {console.log(err)}
+	var data = [];
+	collection.find({
+		_id: ObjectId(id)
+	}).toArray((err, docs) => {
+		if (err) {
+			console.log(err);
+		}
 		data.push(docs);
 		console.log(docs);
 		res.render('quiz', data[0][0]);
 	});
 });
 
-app.get('/answers', (req,res) => {
+app.get('/answers', (req, res) => {
 	var id = req.query.id;
-	console.log(req.query.id)
-	var data  = [];
-	collection.find({_id: ObjectId(id)}).toArray((err, docs) => {
-		if (err) {console.log(err)}
+	console.log(req.query.id);
+	collection.find({
+		_id: ObjectId(id)
+	}).toArray((err, docs) => {
+		if (err) {
+			console.log(err);
+		}
 		res.json(docs[0].correct);
 	});
 });
