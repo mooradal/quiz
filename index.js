@@ -23,10 +23,10 @@ app.listen(process.env.PORT || 4000, () => {
 });
 
 app.use(cors());
-app.set('views', path.join(__dirname, '../Client/Pug'));
+app.set('views', path.join(__dirname, 'Client/Pug'));
 app.set('view engine', 'pug');
 
-app.get('/', (req, res) => {
+app.get('/quizzes', (req, res) => {
 	var data = [];
 	collection.find({}).toArray((err, docs) => {
 		for (var i of docs) {
@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 	});
 });
 
-app.get('/home', (req, res) => {
+app.get('/', (req, res) => {
 	res.render('index');
 });
 
@@ -73,6 +73,6 @@ fileSend('favicon.ico');
 
 function fileSend(filename) {
 	app.get(`/${filename}`, (req, res) => {
-		res.sendFile(path.join(__dirname, `../Client/Resources/${filename}`));
+		res.sendFile(path.join(__dirname, `Client/Resources/${filename}`));
 	});
 }
